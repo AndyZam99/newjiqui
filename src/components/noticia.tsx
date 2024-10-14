@@ -73,9 +73,9 @@ const CardCarousel = () => {
 
   return (
     <section className="" ref={ref}>
-      <div className="relative overflow-hidden mb-16">
+      <div className="relative overflow-hidden mb-16 mt-24">
         <div className="max-w-6xl ml-10">
-          <p className="mb-4 text-2xl text-black font-semibold">
+          <p className="mb-4 text-3xl text-black font-semibold">
             Noticias. <span className="text-slate-500">Ver actualidad.</span>
           </p>
           <motion.div

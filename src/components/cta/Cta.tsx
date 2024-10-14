@@ -5,7 +5,7 @@ import Link from 'next/link';
 const CTAWithOverlayText = () => {
   return (
     <div 
-      className="relative bg-gray-100 max-w-7xl mx-auto h-[400px] md:h-[500px] mb-16 flex items-center justify-center rounded-[20px] overflow-hidden"
+      className="relative mt-24 bg-gray-100 mx-auto h-[70vh] w-[95%] mb-16 flex items-center justify-center rounded-[20px] overflow-hidden"
     >
       <img
         src="/static/cta.webp" 
@@ -13,18 +13,21 @@ const CTAWithOverlayText = () => {
         className="object-cover" 
       />
 
-      <div className="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-50">
+
+      <div className="absolute inset-0 flex flex-col justify-center text-center bg-black bg-opacity-50">
         <div className="ml-7">
-          <h1 className={styles.h1}>
-            Descubre la magia <br/> de Jiquilpan
+          <h1 className={`text-3xl text-black text-center mb-7 ${styles.h1}`}>
+            Descubre la magia de Jiquilpan
           </h1>
 
-          <Link 
-            href="/" 
-            className={styles.h3}
-          >
-            Ver más
-          </Link>
+          <div className="mt-20">
+            <Link 
+              href="/" 
+              className={styles.h3}
+            >
+              Ver más
+            </Link>
+          </div>
         </div>
       </div>
     </div>

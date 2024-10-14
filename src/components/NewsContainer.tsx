@@ -100,17 +100,20 @@ export const NewsContainer = () => {
               </div>
             </div>
           ) : (
-            <div className="text-left text-white">
+            <div className="text-left mb-10 text-white">
               <h1 className={styles.h1}>
-                En Jiquilpan, juntos <br /> somos más
+                En Jiquilpan, juntos somos más
               </h1>
-              <p className={styles.h2}>
-                Cuna del General Lázaro Cárdenas <br /> donde la historia y progreso se unen.
-              </p>
+              <br />
+              <div className="mt-4">
+                <p className={styles.h2}>
+                  Cuna del General Lázaro Cárdenas donde la historia y progreso se unen.
+                </p>
+              </div>
             </div>
           )}
 
-          <div className="mt-12"> 
+          <div className="mt-6"> 
             <input
               type="button"
               value="Ver más"
@@ -118,7 +121,7 @@ export const NewsContainer = () => {
               onClick={handleVerMasClick}
             />
 
-            <div className="flex items-center justify-start space-x-4">
+            <div className="flex items-center justify-start mt-28 space-x-4">
               <button
                 className="p-2 bg-transparent border-2 border-white rounded-full hover:bg-white hover:bg-opacity-20 transition-colors"
                 onClick={handleLeftClick}
@@ -126,10 +129,10 @@ export const NewsContainer = () => {
                 <ChevronLeftIcon className="w-4 h-4 text-white" />
               </button>
               <button
-                className="p-2 bg-transparent border-2 border-white rounded-full hover:bg-white hover:bg-opacity-20 transition-colors"
+                className="p-2 bg-white border-2 border-white rounded-full hover:bg-opacity-20 transition-colors"
                 onClick={handleRightClick}
               >
-                <ChevronRightIcon className="w-4 h-4 text-white" />
+                <ChevronRightIcon className="w-4 h-4 text-black" />
               </button>
             </div>
           </div>

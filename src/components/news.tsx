@@ -43,28 +43,31 @@ const ThreeColumnLayout = () => {
   const items = ["Categoría 1", "Categoría 2", "Categoría 3", "Categoría 4"];
 
   return (
-    <div className="flex justify-center items-center mt-7 mb-16">
-      <div className="flex flex-col md:flex-row justify-between mx-auto max-w-6xl w-full">
-        <div className="w-full md:w-1/3 mb-6 md:mb-0 p-4 transition-transform transform hover:scale-105">
-          <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">Categorías</h2>
-          <ul className="list-none space-y-2">
+    <div className="mt-24 mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mx-auto max-w-6xl w-full">
+        
+        {/* Columna de categorías */}
+        <div className="p-6 bg-gray-100 rounded-xl shadow-md transition-transform hover:scale-105">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Categorías</h2>
+          <ul className="space-y-4">
             {items.map((item, index) => (
-              <li key={index} className="text-lg text-gray-800 cursor-pointer hover:underline">
+              <li key={index} className="text-lg text-gray-800 cursor-pointer hover:text-blue-600">
                 {item}
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="w-full md:w-1/3 mb-6 md:mb-0 relative flex flex-col items-center p-4 transition-transform transform hover:scale-105">
+        {/* Columna con imagen destacada de la noticia reciente */}
+        <div className="relative p-6 bg-white rounded-xl shadow-md transition-transform hover:scale-105">
           {noticiaReciente && noticiaReciente.imagenDestacada ? (
             <>
               <img
                 src={urlFor(noticiaReciente.imagenDestacada).url()}
                 alt="Imagen de la Noticia"
-                className="w-full h-auto rounded-[20px] shadow-md mb-4"
+                className="w-full h-auto rounded-lg mb-4"
               />
-              <p className="absolute bottom-2 right-2 text-lg text-gray-800 bg-white p-1 rounded-[20px] shadow">
+              <p className="absolute bottom-4 right-4 text-sm text-white bg-gray-800 p-2 rounded-full">
                 {format(new Date(noticiaReciente.fechaPublicacion), "dd/MM/yyyy")}
               </p>
             </>
@@ -73,21 +76,20 @@ const ThreeColumnLayout = () => {
           )}
         </div>
 
-        <div className="w-full md:w-1/3 flex flex-col items-start p-4 transition-transform transform hover:scale-105">
+        {/* Columna con contenido de la noticia reciente */}
+        <div className="p-6 bg-white rounded-xl shadow-md transition-transform hover:scale-105">
           {noticiaReciente ? (
             <>
-              <h2 className="text-3xl font-bold text-gray-800 text-start mb-4">
-                {noticiaReciente.titulo}
-              </h2>
-              <div className="text-lg text-gray-800 text-justify">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">{noticiaReciente.titulo}</h2>
+              <div className="text-gray-700 mb-4">
                 <PortableText value={noticiaReciente.contenido} />
               </div>
-              <Link href={`/noticias/${noticiaReciente.slug.current}`}>
-                <button className="-mt-4 px-2 py-2 text-gray-400 text-xs">Leer más</button>
+              <Link href={`/noticias/${noticiaReciente.slug.current}`} className="text-blue-600 hover:underline">
+                Leer más
               </Link>
             </>
           ) : (
-            "Cargando descripción..."
+            <p>Cargando descripción...</p>
           )}
         </div>
       </div>

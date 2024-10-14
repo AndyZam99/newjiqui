@@ -29,11 +29,11 @@ interface CardProps {
 
 const HoverDevCards: React.FC = () => {
   return (
-    <div className="mb-16">
+    <div className="mb-16 mt-24">
       <BubbleText text="Descubre la mejor ciudad para vivir en la ciénega de Michoacán" />
       
       <div className="flex justify-center">
-        <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 max-w-[1300px]">
+        <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 max-w-[1450px]">
           <Card
             title="Cercanía"
             subtitle="Estar siempre disponibles y accesibles para los demás."
@@ -100,7 +100,7 @@ const Card: React.FC<CardProps> = ({ title, subtitle, Icon, href }) => {
 
       <Icon className="mb-2 text-2xl text-violet-600 group-hover:text-white transition-colors relative z-10 duration-300" />
 
-      <h3 className="font-medium text-lg text-slate-950 group-hover:text-white relative z-10 duration-300">
+      <h3 className="font-medium text-xl text-slate-950 group-hover:text-white relative z-10 duration-300">
         {title}
       </h3>
       <p className="text-slate-400 group-hover:text-violet-200 relative z-10 duration-300">
