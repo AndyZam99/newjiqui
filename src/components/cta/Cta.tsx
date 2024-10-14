@@ -1,5 +1,6 @@
 import { styles } from "@/styles";
 import React from "react";
+import Link from 'next/link'; // Importa el componente Link
 
 const CTAWithOverlayText = () => {
   return (
@@ -18,12 +19,12 @@ const CTAWithOverlayText = () => {
             Descubre la magia <br/> de Jiquilpan
           </h1>
 
-          <a
+          <Link // Cambia a Link
             href="/" 
             className={styles.h3}
           >
             Ver más
-          </a>
+          </Link>
         </div>
       </div>
     </div>

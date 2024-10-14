@@ -8,7 +8,9 @@ export const Navbar = () => {
       <RoundedDrawerNav
         links={NavbarTitles}
         navBackground="bg-white"
-        bodyBackground="bg-black" children={undefined}>
+        bodyBackground="bg-black"
+      >
+        {/* Si necesitas pasar contenido adicional, lo harías aquí */}
       </RoundedDrawerNav>
     </div>
   );
