@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { RoundedDrawerNavProps } from "@/types"; // Asegúrate de que este tipo tenga 'children'
+import { RoundedDrawerNavProps } from "@/types"; 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { DesktopLinks } from "./DesktopLinks";
