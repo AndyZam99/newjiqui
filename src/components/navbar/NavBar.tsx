@@ -10,9 +10,7 @@ export const Navbar = () => {
         navBackground="bg-white"
         bodyBackground="bg-black"
       >
-        <div>
-          <h1 className="text-lg text-white">Jiji</h1>
-        </div>
+        {null} 
       </RoundedDrawerNav>
     </div>
   );
