@@ -10,7 +10,9 @@ export const Navbar = () => {
         navBackground="bg-white"
         bodyBackground="bg-black"
       >
-        {/* Si necesitas pasar contenido adicional, lo harías aquí */}
+        <div>
+          <h1 className="text-lg text-white">Jiji</h1>
+        </div>
       </RoundedDrawerNav>
     </div>
   );
