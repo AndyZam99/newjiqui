@@ -74,7 +74,7 @@ export const RoundedDrawerNav = ({ children, navBackground, bodyBackground, link
           <div className="flex items-start justify-between">
             <div className="flex items-start">
               <Image
-                src="/static/logo.webp"
+                src="/static/logo.gif"
                 width={200}
                 height={200}
                 alt="Logo de Jiquilpan"

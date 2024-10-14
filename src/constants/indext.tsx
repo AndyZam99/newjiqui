@@ -17,7 +17,7 @@ export const NavbarTitles = [
         sublinks: [
           {
             title: "Noticias",
-            href: "#",
+            href: "/noticias",
           },
         ],
       },

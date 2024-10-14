@@ -2,60 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
 }
 
 .body-hero {
   padding: 0;
   margin: 0;
-  height: 200vh;
+  height: 0;
   background: #fcfcff;
-  font-family: 'Kenyan Coffee', sans-serif;
+  font-family: 'Montserrat', sans-serif; 
 }
   
 .full {
   height: 100vh;
 }
 
-/* styles/globals.css */
-
-@font-face {
-  font-family: 'Kenyan Coffee';
-  src: url('/fonts/kenyan coffee bd.otf') format('opentype');
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Kenyan Coffee';
-  src: url('/fonts/kenyan coffee bd it.otf') format('opentype');
-  font-weight: bold;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Kenyan Coffee';
-  src: url('/fonts/kenyan coffee rg.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Kenyan Coffee';
-  src: url('/fonts/kenyan coffee rg it.otf') format('opentype');
-  font-weight: normal;
-  font-style: italic;
-}
-
-/* Aplica la fuente por defecto al cuerpo
 body {
-  font-family: 'Kenyan Coffee', sans-serif;
-} */
+  font-family: 'Montserrat', sans-serif; 
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+

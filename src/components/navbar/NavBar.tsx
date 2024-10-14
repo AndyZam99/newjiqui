@@ -8,14 +8,7 @@ export const Navbar = () => {
       <RoundedDrawerNav
         links={NavbarTitles}
         navBackground="bg-white"
-        bodyBackground="bg-black"
-      >
-        <div className="flex flex-col items-center justify-center px-12 py-32">
-          <p className="text-center">
-            {/* TODO: Configurar banner de noticia */}
-            La imagen de noticias va aquí {":)"}
-          </p>
-        </div>
+        bodyBackground="bg-black" children={undefined}>
       </RoundedDrawerNav>
     </div>
   );
