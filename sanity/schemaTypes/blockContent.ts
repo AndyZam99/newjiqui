@@ -24,6 +24,5 @@ export default defineType({
       type: 'image',
       options: { hotspot: true },
     },
-    // Puedes agregar otros tipos de bloques aquí si es necesario
   ],
 });

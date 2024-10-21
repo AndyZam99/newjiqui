@@ -31,8 +31,15 @@ const NoticiaPage = () => {
   const fetchNoticias = async () => {
     try {
       const results: Noticia[] = await client.fetch(
-        `*[_type == "noticia"]{titulo, slug, fechaPublicacion, imagenDestacada, categoria}` 
+        `*[_type == "noticia"]{
+          titulo, 
+          slug, 
+          fechaPublicacion, 
+          "imagenDestacada": imagenDestacada.asset->url, 
+          categoria
+        }`
       );
+      
       setNoticias(results);
     } catch (error) {
       console.error("Error al obtener noticias:", error);
@@ -103,18 +110,18 @@ const NoticiaPage = () => {
           <div className="p-10 relative text-center">
             {currentNoticias.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 mx-auto max-w-6xl justify-center">
-                {currentNoticias.map((noticia) => (
-                  <div key={noticia.slug.current} className="w-full max-w-sm mx-auto relative mb-10">
-                    <Card 
-                      titulo={noticia.titulo} 
-                      fecha={new Date(noticia.fechaPublicacion).toLocaleDateString()} 
-                      categoria={noticia.categoria} 
-                      imagenUrl={urlFor(noticia.imagenDestacada).url()} 
-                      slug={noticia.slug.current}
-                    />
-                  </div>
-                ))}
-              </div>
+              {currentNoticias.map((noticia) => (
+                <div key={noticia.slug.current} className="w-full max-w-sm mx-auto relative mb-10">
+                  <Card 
+                    titulo={noticia.titulo} 
+                    fecha={new Date(noticia.fechaPublicacion).toLocaleDateString()} 
+                    categoria={typeof noticia.categoria === "string" || typeof noticia.categoria === "number" ? noticia.categoria : "Sin categoría"} 
+                    imagenUrl={noticia.imagenDestacada ? noticia.imagenDestacada : "/default-image.jpg"} 
+                    slug={noticia.slug.current}
+                  />
+                </div>
+              ))}
+            </div>            
             ) : (
               <p>No hay noticias disponibles.</p>
             )}

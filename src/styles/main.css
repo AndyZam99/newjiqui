@@ -1,7 +1,7 @@
 .card {
     width: 100%; 
-    max-width: 350px;
-    height: 290px;
+    max-width: 600px;
+    height: 400px;
     background: #f9f9f9; 
     border-radius: 20px;
     overflow: hidden;
@@ -12,7 +12,7 @@
 
 .card__image {
     flex-shrink: 0;
-    height: 200px; 
+    height: 310px; 
 }
 
 .card__image img {

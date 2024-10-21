@@ -68,19 +68,19 @@ export const NewsContainer = () => {
   return (
     <div className="flex items-center justify-center mb-16">
       <div
-      className="flex flex-col items-start justify-start px-6 py-12 overflow-hidden"
-      style={{
-        backgroundImage: showBanner && banners.length > 0
-          ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${urlFor(banners[currentIndex].imagenDestacada).url()})`
-          : 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/hero.png")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        height: "70vh",
-        width: "95%",
-        borderRadius: "20px",
-        overflow: "hidden",
-      }}
+        className="flex flex-col items-start justify-start px-6 py-12 overflow-hidden"
+        style={{
+          backgroundImage: showBanner && banners.length > 0
+            ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${urlFor(banners[currentIndex].imagenDestacada).url()})`
+            : 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/hero.png")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          height: "70vh",
+          width: "95%",
+          borderRadius: "20px",
+          overflow: "hidden",
+        }}
     >
         <div className="relative z-10 p-10">
           {showBanner && banners.length > 0 ? (
@@ -123,13 +123,13 @@ export const NewsContainer = () => {
 
             <div className="flex items-center justify-start mt-28 space-x-4">
               <button
-                className="p-2 bg-transparent border-2 border-white rounded-full hover:bg-white hover:bg-opacity-20 transition-colors"
+                className="p-2 bg-transparent border-2 border-white rounded-full hover:bg-yellow-100 transition-colors"
                 onClick={handleLeftClick}
               >
                 <ChevronLeftIcon className="w-4 h-4 text-white" />
               </button>
               <button
-                className="p-2 bg-white border-2 border-white rounded-full hover:bg-opacity-20 transition-colors"
+                className="p-2 bg-white border-2 border-white rounded-full hover:bg-yellow-100 transition-colors"
                 onClick={handleRightClick}
               >
                 <ChevronRightIcon className="w-4 h-4 text-black" />

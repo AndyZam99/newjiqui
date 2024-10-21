@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "ES2017", // Aquí puedes mantener la versión de target que necesites
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -16,6 +17,14 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "./sanity/schemaTypes/**/*.{ts,tsx,js,jsx}"
+  ],
+  "exclude": [
+    "node_modules",
+    "./sanity/schemaTypes/entrada.ts"
+  ]
 }

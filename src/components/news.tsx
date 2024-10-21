@@ -1,100 +1,149 @@
 import React, { useEffect, useState } from "react";
 import client from "@/lib/sanityClient";
 import imageUrlBuilder from "@sanity/image-url";
-import { PortableText } from "@portabletext/react";
-import { format } from "date-fns";
-import Link from "next/link";
+import Card from "@/components/NoticiaCard";
 
 const builder = imageUrlBuilder(client);
 
+// Función para construir la URL de la imagen desde Sanity
 function urlFor(source: any) {
   return builder.image(source);
 }
 
+// Definición de la interfaz para una noticia
 interface Noticia {
-  imagenDestacada: any;
-  contenido: any;
+  categoria: string; // Ya es un string, no un objeto
   titulo: string;
+  slug: { current: string };
   fechaPublicacion: string;
-  slug: {
-    current: string;
-  };
+  imagenDestacada: any;
+}
+
+// Definición de la interfaz para una categoría
+interface Categoria {
+  _id: string;
+  nombre: string;
+  slug: { current: string };
 }
 
 const ThreeColumnLayout = () => {
-  const [noticiaReciente, setNoticiaReciente] = useState<Noticia | null>(null);
+  const [currentNoticias, setCurrentNoticias] = useState<Noticia[]>([]);
+  const [categories, setCategories] = useState<Categoria[]>([]); // Estado para categorías
+  const [searchTerm, setSearchTerm] = useState(""); // Estado para manejar el término de búsqueda
+  const [filteredItems, setFilteredItems] = useState<Categoria[]>([]); // Estado para categorías filtradas
 
-  const fetchNoticiaReciente = async () => {
+  // Función para obtener las categorías desde Sanity
+  const fetchCategories = async () => {
+    try {
+      const result = await client.fetch(`*[_type == "categoria"]{_id, nombre, slug}`);
+      setCategories(result); // Guardamos las categorías en el estado
+    } catch (error) {
+      console.error("Error al obtener las categorías:", error);
+    }
+  };
+
+  // Función para obtener la noticia más reciente desde Sanity
+  const fetchNoticiasRecientes = async () => {
     try {
       const result = await client.fetch(
-        `*[_type == "noticia"] | order(fechaPublicacion desc)[0]{imagenDestacada, contenido, titulo, fechaPublicacion, slug}`
+        `*[_type == "noticia"] | order(fechaPublicacion desc)[0...2]{
+          titulo, 
+          fechaPublicacion, 
+          "categoria": categoria->nombre, // Expandir la referencia para obtener el nombre de la categoría
+          imagenDestacada, 
+          slug
+        }`
       );
-      console.log("Noticia reciente:", result);
-      setNoticiaReciente(result);
+      setCurrentNoticias(result); // Guardamos la noticia más reciente en `currentNoticias`
     } catch (error) {
       console.error("Error al obtener la noticia más reciente:", error);
     }
   };
 
   useEffect(() => {
-    fetchNoticiaReciente();
+    fetchCategories(); // Cargar categorías
+    fetchNoticiasRecientes(); // Cargar noticias recientes
   }, []);
 
-  const items = ["Categoría 1", "Categoría 2", "Categoría 3", "Categoría 4"];
+  // Efecto para filtrar las categorías cuando el término de búsqueda cambia
+  useEffect(() => {
+    const filtered = categories.filter((item) =>
+      item.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredItems(filtered);
+  }, [searchTerm, categories]); // Filtrar cuando el término de búsqueda o las categorías cambien
 
   return (
     <div className="mt-24 mb-16">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mx-auto max-w-6xl w-full">
-        
-        {/* Columna de categorías */}
-        <div className="p-6 bg-gray-100 rounded-xl shadow-md transition-transform hover:scale-105">
+
+        {/* Primera noticia más reciente */}
+        {currentNoticias.length > 0 && (
+          <div className="md:col-span-1 w-full max-w-sm h-auto mx-auto relative mb-10">
+            <Card 
+              titulo={currentNoticias[0].titulo} 
+              fecha={new Date(currentNoticias[0].fechaPublicacion).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })} 
+              categoria={currentNoticias[0].categoria}
+              imagenUrl={urlFor(currentNoticias[0].imagenDestacada).url()} 
+              slug={currentNoticias[0].slug.current}
+            />
+          </div>
+        )}
+
+        {/* Columna de categorías con el campo de búsqueda integrado */}
+        <div className="md:col-span-1 p-5 bg-gray-100 rounded-xl shadow-md transition-transform hover:scale-105"
+            style={{ maxHeight: '400px', maxWidth: '350px' }}>
+          {/* Campo de búsqueda */}
+          <input
+            type="text"
+            placeholder="Buscar categoría"
+            className="p-2 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200 mb-4"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Categorías</h2>
-          <ul className="space-y-4">
-            {items.map((item, index) => (
-              <li key={index} className="text-lg text-gray-800 cursor-pointer hover:text-blue-600">
-                {item}
-              </li>
-            ))}
+
+          {/* Lista filtrada de categorías */}
+          <ul className="space-y-2 overflow-y-auto" style={{ maxHeight: '250px' }}>
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item) => (
+                <li
+                  key={item._id}
+                  className="text-lg text-gray-800 cursor-pointer hover:text-blue-600"
+                >
+                  {item.nombre}
+                </li>
+              ))
+            ) : (
+              <li className="text-lg text-gray-800">No se encontraron categorías</li>
+            )}
           </ul>
         </div>
 
-        {/* Columna con imagen destacada de la noticia reciente */}
-        <div className="relative p-6 bg-white rounded-xl shadow-md transition-transform hover:scale-105">
-          {noticiaReciente && noticiaReciente.imagenDestacada ? (
-            <>
-              <img
-                src={urlFor(noticiaReciente.imagenDestacada).url()}
-                alt="Imagen de la Noticia"
-                className="w-full h-auto rounded-lg mb-4"
-              />
-              <p className="absolute bottom-4 right-4 text-sm text-white bg-gray-800 p-2 rounded-full">
-                {format(new Date(noticiaReciente.fechaPublicacion), "dd/MM/yyyy")}
-              </p>
-            </>
-          ) : (
-            <p>Cargando imagen...</p>
-          )}
-        </div>
-
-        {/* Columna con contenido de la noticia reciente */}
-        <div className="p-6 bg-white rounded-xl shadow-md transition-transform hover:scale-105">
-          {noticiaReciente ? (
-            <>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">{noticiaReciente.titulo}</h2>
-              <div className="text-gray-700 mb-4">
-                <PortableText value={noticiaReciente.contenido} />
-              </div>
-              <Link href={`/noticias/${noticiaReciente.slug.current}`} className="text-blue-600 hover:underline">
-                Leer más
-              </Link>
-            </>
-          ) : (
-            <p>Cargando descripción...</p>
-          )}
-        </div>
+        {/* Segunda noticia más reciente */}
+        {currentNoticias.length > 1 && (
+          <div className="md:col-span-1 w-full max-w-sm h-auto mx-auto relative mb-10">
+            <Card 
+              titulo={currentNoticias[1].titulo} 
+              fecha={new Date(currentNoticias[1].fechaPublicacion).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })} 
+              categoria={currentNoticias[1].categoria}
+              imagenUrl={urlFor(currentNoticias[1].imagenDestacada).url()} 
+              slug={currentNoticias[1].slug.current}
+            />
+          </div>
+        )}
       </div>
     </div>
-  );
+  ); 
 };
 
 export default ThreeColumnLayout;

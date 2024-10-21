@@ -76,7 +76,7 @@ const CardCarousel = () => {
       <div className="relative overflow-hidden mb-16 mt-24">
         <div className="max-w-6xl ml-10">
           <p className="mb-4 text-3xl text-black font-semibold">
-            Noticias. <span className="text-slate-500">Ver actualidad.</span>
+            Noticias. <span className="text-yellow-500">Ver actualidad.</span>
           </p>
           <motion.div
             animate={{
@@ -119,7 +119,7 @@ const CardCarousel = () => {
         <input
           type="button"
           value="Ver todo"
-          className="px-2 py-3 -mt-[37px] bg-transparent text-gray-400 text-xl font-semibold rounded-2xl cursor-pointer transition-colors"
+          className="px-2 py-3 -mt-[37px] bg-transparent text-pink-500 text-xl font-semibold rounded-2xl cursor-pointer transition-colors"
           onClick={() => router.push('/noticias')}
         />
       </div>
