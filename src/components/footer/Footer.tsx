@@ -24,58 +24,58 @@ const Footer = () => {
   return (
     <><div className="bg-gray-200 rounded-2xl mx-4 md:mx-10 lg:mx-5 mb-2 pb-2">
         <div className='flex flex-col md:flex-row justify-between items-end'>
-          <div className='justify-center ml-7 mt-7'>
-            <Link href="https://consultapublicamx.plataformadetransparencia.org.mx/vut-web/?idSujetoObigadoParametro=3463&idEntidadParametro=16&idSectorParametro=21" target="_blank" rel="noopener noreferrer">
-              <Image
-                width={500}
-                height={500}
-                className='w-32'
-                alt='Logo Live Tech'
-                src='/static/pnt.png' 
-              />
-            </Link>
-          </div>
-          
-          <div className='flex justify-between ml-20 mt-2 text-black w-full md:w-[500px]'>
-            {NavbarTitles.map((item, index) => (
-              <React.Fragment key={index}>
-                <div className='flex flex-col w-1/4 items-center'>
-                  <h4 className='font-bold text-sm'>{item.title}</h4>
-                  <ul className='list-none pl-0 text-xs'>
-                    {item.sublinks.map((sublink, subIndex) => (
-                      <li key={subIndex}>
-                        <a href={sublink.href} className='text-gray-700 hover:text-blue-500'>
-                          {sublink.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+  <div className='justify-center ml-7 mt-7'>
+    <Link href="https://consultapublicamx.plataformadetransparencia.org.mx/vut-web/?idSujetoObigadoParametro=3463&idEntidadParametro=16&idSectorParametro=21" target="_blank" rel="noopener noreferrer">
+      <Image
+        width={500}
+        height={500}
+        className='w-32'
+        alt='Logo Live Tech'
+        src='/static/pnt.png' 
+      />
+    </Link>
+  </div>
 
-                {/* Inserta el div con la imagen después del primer item */}
-                {index === 0 && (
-                  <div className='flex flex-col items-center w-1/4'>
-                    <Image
-                      src="/static/2027.webp"
-                      alt="Logo"
-                      width={300}
-                      height={250}
-                      className="w-[150px] h-[50px] mb-4 justify-center rounded-lg"
-                    />
-                  </div>
-                )}
-              </React.Fragment>
+  {/* Flex column in small screens, row in md+ screens */}
+  <div className='flex flex-col md:flex-row justify-between ml-20 mt-2 text-black w-full md:w-[500px]'>
+    {NavbarTitles.map((item, index) => (
+      <React.Fragment key={index}>
+        <div className='flex flex-col w-full md:w-1/4 items-center mb-4 md:mb-0'>
+          <h4 className='font-bold text-sm'>{item.title}</h4>
+          <ul className='list-none pl-0 text-xs'>
+            {item.sublinks.map((sublink, subIndex) => (
+              <li key={subIndex}>
+                <a href={sublink.href} className='text-gray-700 hover:text-blue-500'>
+                  {sublink.title}
+                </a>
+              </li>
             ))}
-          </div>
-          
-              <div>
-                <div className='text-justify mr-20 mb-4'>
-                  <h4 className='text-gray-700 font-bold text-sm'>Números de Emergencia</h4>
-                  <p className='text-gray-700 text-xs'>Seguridad Pública: 35-31-27-65-67</p>
-                  <p className='text-gray-700 text-xs'>Protección Civil: 35-35-33-41-08</p>
-                </div>
-              </div>
+          </ul>
         </div>
+
+        {/* Insert image after the first item */}
+        {index === 0 && (
+          <div className='flex flex-col items-center w-full md:w-1/4 mb-4 md:mb-0'>
+            <Image
+              src="/static/2027.webp"
+              alt="Logo"
+              width={300}
+              height={250}
+              className="w-[150px] h-[50px] mb-4 justify-center rounded-lg"
+            />
+          </div>
+        )}
+      </React.Fragment>
+    ))}
+  </div>
+
+  <div className='text-justify mr-20 mb-4'>
+    <h4 className='text-gray-700 font-bold text-sm'>Números de Emergencia</h4>
+    <p className='text-gray-700 text-xs'>Seguridad Pública: 35-31-27-65-67</p>
+    <p className='text-gray-700 text-xs'>Protección Civil: 35-35-33-41-08</p>
+  </div>
+</div>
+
   
         <div className='flex flex-col items-center mt-10'>
         <div className='w-full border-t border-gray-300 my-15'></div>
